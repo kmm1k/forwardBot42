@@ -22,13 +22,14 @@ class Forwarder42:
                              config["api_id"],
                              config["api_hash"])
         await bot.start(bot_token=config["bot_token"])
+        logger.info("loaded configs and starting")
 
-        pattern_to_match = f'(?i){bot_name}.+'
+        pattern_to_match = f'(?i)@{self.bot_name}.+'
 
         @bot.on(events.NewMessage(pattern=pattern_to_match))
         async def handler(event: NewMessage.Event):
             logger.info(event)
-            response = event.text.replace(f'@{bot_name}', "")
+            response = event.text.replace(f'@{self.bot_name}', "")
 
             target_id = 0
             for i in self.channel_pairs:

@@ -18,3 +18,9 @@ Your_bot_name: text you want to forward #bot will output this text
 7) add your bot to the group chats
 8) get the group chat id's and place them into the config.yml as shown in the sample_config.yml
 9) run `make run` or `python forwarder42.py`
+
+
+### Deploy with Docker
+1) create the config file 
+2) build docker image `docker build -t f42_bot .`
+3) docker run `docker run --name f42_bot -i -t f42_bot`
