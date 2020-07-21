@@ -1,4 +1,5 @@
 import asyncio
+import time
 
 from telethon import TelegramClient, events
 from telethon.events import NewMessage
@@ -82,9 +83,10 @@ class Forwarder42:
 
             if target_id != 0:
                 await bot.send_message(source_id, 'Booked!')
-                await bot.forward_messages(target_id, event.id, source_id)
                 if event.reply_to_msg_id:
                     await bot.forward_messages(target_id, event.reply_to_msg_id, source_id)
+                    time.sleep(2)
+                await bot.forward_messages(target_id, event.id, source_id)
                 logger.info('messages sent out')
 
         await bot.run_until_disconnected()
