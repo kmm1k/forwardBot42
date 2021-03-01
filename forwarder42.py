@@ -80,9 +80,15 @@ class Forwarder42:
                 if i[0] == event.chat_id:
                     target_id = i[1]
                     source_id = i[0]
+                    await bot.send_message(source_id, 'Booked!')
+
+            for i in self.channel_pairs:
+                if i[1] == event.chat_id:
+                    target_id = i[0]
+                    source_id = i[1]
+                    await bot.send_message(source_id, 'sent message back to origin group')
 
             if target_id != 0:
-                await bot.send_message(source_id, 'Booked!')
                 if event.reply_to_msg_id:
                     await bot.forward_messages(target_id, event.reply_to_msg_id, source_id)
                     time.sleep(2)
